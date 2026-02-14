@@ -58,11 +58,12 @@ function showImage(index) {
   lightboxContent.innerHTML = `<img src="${images[index]}" alt="gallery image">`;
 }
 
-// Close
-closeBtn.addEventListener("click", () => {
-  lightbox.style.display = "none";
+// Close when clicking outside image (background)
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
 });
-
 // Prev
 prevBtn.addEventListener("click", () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;

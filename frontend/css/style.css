@@ -359,21 +359,6 @@ nav a.active {
   margin-top: 5%;
 }
 
-#closeLightbox {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: #fff; /* white so it shows on dark background */
-  font-size: 2.5rem; /* make it large */
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 1000; /* ensure it's above the image */
-}
-
-#closeLightbox:hover {
-  color: red; /* hover effect */
-}
-
 #prev,
 #next {
   position: absolute;
