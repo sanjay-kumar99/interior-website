@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <title>Sai Aluminium & Glass House</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
@@ -39,48 +44,72 @@
             <a href="gallery.html?cat=ssRailingGate">SS Railing Gate</a>
           </div>
         </div>
-
         <a href="about.html">About US</a>
         <a href="contact.html">Contact</a>
       </nav>
     </header>
 
     <!-- GALLERY -->
-    <section class="gallery">
+    <section class="gallery container my-5">
       <h2>Our Work Gallery</h2>
-      <div class="gallery-group" data-category="false-ceiling"></div>
-
-      <div class="gallery-group" data-category="modern-kitchen"></div>
-
-      <div class="gallery-group" data-category="wardrobe-almirah"></div>
-
-      <div class="gallery-group" data-category="upvc-door"></div>
-
-      <div class="gallery-group" data-category="glass-railing"></div>
-
-      <div class="gallery-group" data-category="acp-sheet"></div>
-
-      <div class="gallery-group" data-category="premium-sliding-door"></div>
-
-      <div class="gallery-group" data-category="invisible-safety-grills"></div>
-
-      <div class="gallery-group" data-category="toughened-glass"></div>
-
-      <div class="gallery-group" data-category="aluminium-glass-window"></div>
-
-      <div class="gallery-group" data-category="ss-railing-gate"></div>
+      <div class="row">
+        <div class="col-md-4 gallery-group" data-category="false-ceiling"></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="modern-kitchen"
+        ></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="wardrobe-almirah"
+        ></div>
+        <div class="col-md-4 gallery-group" data-category="upvc-door"></div>
+        <div class="col-md-4 gallery-group" data-category="glass-railing"></div>
+        <div class="col-md-4 gallery-group" data-category="acp-sheet"></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="premium-sliding-door"
+        ></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="invisible-safety-grills"
+        ></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="toughened-glass"
+        ></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="aluminium-glass-window"
+        ></div>
+        <div
+          class="col-md-4 gallery-group"
+          data-category="ss-railing-gate"
+        ></div>
+      </div>
     </section>
 
-    <div id="lightbox">
-      <div id="lightboxContent"></div>
-      <span id="prev">&#10094;</span>
-      <span id="next">&#10095;</span>
+    <!-- Bootstrap Modal for Image Preview -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-dark">
+          <div class="modal-body text-center">
+            <img id="modalImage" src="" class="img-fluid" alt="Preview" />
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button id="prevBtn" class="btn btn-light">‹ Prev</button>
+            <button id="nextBtn" class="btn btn-light">Next ›</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="text-center py-3">
       <p>© 2026 Sai Aluminium & Glass House</p>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/gallery.js"></script>
   </body>
 </html>

@@ -1,44 +1,38 @@
 const BASE_URL = "https://interior-website-bwn1.onrender.com/api/gallery";
 
-const lightbox = document.getElementById("lightbox");
-const lightboxContent = document.getElementById("lightboxContent");
-const closeBtn = document.getElementById("closeLightbox");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
+const modalImage = document.getElementById("modalImage");
+const imageModal = new bootstrap.Modal(document.getElementById("imageModal"));
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
 
 let currentIndex = 0;
-let images = [];
+let allImages = [];
 
-// ✅ Load gallery images from backend
+// Load gallery images dynamically
 async function loadGallery() {
   const groups = document.querySelectorAll(".gallery-group");
 
   for (const group of groups) {
     const category = group.dataset.category;
-    console.log("Fetching gallery:", `${BASE_URL}/${category}`);
-
     try {
       const res = await fetch(`${BASE_URL}/${category}`);
       const data = await res.json();
 
-      // Add heading
-      group.innerHTML = `<h3>${category}</h3>`;
-
       data.forEach((imgUrl) => {
         const img = document.createElement("img");
         img.src = imgUrl;
-        img.className = "gallery-img";
-
-        // ✅ Add to global images array
-        images.push(imgUrl);
-
-        // ✅ Attach click event
-        img.addEventListener("click", () => {
-          currentIndex = images.indexOf(imgUrl);
-          openLightbox();
-        });
-
+        img.className = "img-fluid mb-3 gallery-img";
         group.appendChild(img);
+
+        // Add to global array
+        allImages.push(img);
+
+        // Click event to open modal
+        img.addEventListener("click", () => {
+          currentIndex = allImages.indexOf(img);
+          showImage();
+          imageModal.show();
+        });
       });
     } catch (err) {
       console.error("Gallery error:", category, err);
@@ -46,47 +40,32 @@ async function loadGallery() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", loadGallery);
-
-// ✅ Lightbox functions
-function openLightbox() {
-  lightbox.style.display = "block";
-  showImage(currentIndex);
+function showImage() {
+  modalImage.src = allImages[currentIndex].src;
 }
 
-function showImage(index) {
-  lightboxContent.innerHTML = `<img src="${images[index]}" alt="gallery image">`;
-}
-
-// Close when clicking outside image (background)
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    lightbox.style.display = "none";
-  }
-});
-// Prev
+// Prev/Next buttons
 prevBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  showImage(currentIndex);
+  currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+  showImage();
 });
 
-// Next
 nextBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % images.length;
-  showImage(currentIndex);
+  currentIndex = (currentIndex + 1) % allImages.length;
+  showImage();
 });
 
-// ✅ Keyboard navigation
+// Keyboard navigation
 document.addEventListener("keydown", (e) => {
-  if (lightbox.style.display === "block") {
+  if (document.getElementById("imageModal").classList.contains("show")) {
     if (e.key === "ArrowLeft") {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
+      currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+      showImage();
     } else if (e.key === "ArrowRight") {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    } else if (e.key === "Escape") {
-      lightbox.style.display = "none";
+      currentIndex = (currentIndex + 1) % allImages.length;
+      showImage();
     }
   }
 });
+
+window.addEventListener("DOMContentLoaded", loadGallery);

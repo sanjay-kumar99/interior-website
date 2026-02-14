@@ -268,6 +268,8 @@ nav a.active {
   object-fit: cover;
   margin: 8px;
   border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .gallery-group h3 {
@@ -303,14 +305,20 @@ nav a.active {
     box-shadow 0.3s;
 }
 
-.gallery-track img:hover,
-.gallery-track video:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.gallery img:hover {
+  transform: scale(1.05); /* subtle zoom on hover */
+}
+/* Modal image */
+#modalImage {
+  max-height: 80vh; /* keep image within screen height */
+  object-fit: contain; /* maintain aspect ratio */
 }
 
-.gallery-track video {
-  display: block;
+/* Prev/Next buttons inside modal */
+#prevBtn,
+#nextBtn {
+  min-width: 80px;
+  font-size: 1.2rem;
 }
 
 @keyframes fadeIn {
