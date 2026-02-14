@@ -2,12 +2,12 @@ const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const path = require("path");
+const nodemailer = require("nodemailer");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 const BASE_URL =
   process.env.BASE_URL || "https://interior-website-bwn1.onrender.com";
-  
 
 // ✅ Proper CORS config
 app.use(
@@ -22,6 +22,40 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // ✅ For form submissions
+
+// ✅ CONTACT FORM ROUTE
+app.post("/api/contact", async (req, res) => {
+  const { name, phone, email, message } = req.body;
+
+  try {
+    // Configure transporter (use Gmail or your SMTP)
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER, // your Gmail
+        pass: process.env.EMAIL_PASS, // app password (not your real password!)
+      },
+    });
+
+    // Email content
+    let mailOptions = {
+      from: email,
+      to: "saiinterior@gmail.com", // your business email
+      subject: "New Contact Form Submission",
+      text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nMessage:\n${message}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.json({ success: true, message: "Message sent successfully!" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to send message." });
+  }
+});
 
 // Serve frontend (optional)
 app.use(express.static(path.join(__dirname, "../frontend")));

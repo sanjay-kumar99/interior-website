@@ -89,3 +89,43 @@ document.addEventListener("DOMContentLoaded", () => {
     testimonials[index].style.display = "block";
   }, 4000); // change every 4 sec
 });
+
+const lightbox = document.getElementById("lightbox");
+const lightboxContent = document.getElementById("lightboxContent");
+const closeBtn = document.getElementById("closeLightbox");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+let currentIndex = 0;
+let images = [];
+
+document.querySelectorAll(".gallery-group img").forEach((img, index) => {
+  images.push(img.src);
+  img.addEventListener("click", () => {
+    currentIndex = index;
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  lightbox.style.display = "block";
+  showImage(currentIndex);
+}
+
+function showImage(index) {
+  lightboxContent.innerHTML = `<img src="${images[index]}" alt="gallery image">`;
+}
+
+closeBtn.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
+
+prevBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  showImage(currentIndex);
+});
+
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  showImage(currentIndex);
+});
