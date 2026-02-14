@@ -1,7 +1,8 @@
 const BASE_URL = "https://interior-backend.onrender.com";
 
 document.querySelectorAll(".service-card img").forEach((img) => {
-  const category = img.dataset.cat;
+  const category = img.dataset.category || img.dataset.cat;
+  console.log("Fetching:", `${BASE_URL}/api/gallery/${category}`);
 
   fetch(`${BASE_URL}/api/gallery/${category}`)
     .then((res) => res.json())

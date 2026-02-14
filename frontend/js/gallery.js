@@ -4,7 +4,8 @@ async function loadGallery() {
   const groups = document.querySelectorAll(".gallery-group");
 
   for (const group of groups) {
-    const category = group.dataset.category;
+    const category = group.dataset.category || group.dataset.cat;
+    console.log("Fetching gallery:", `${BASE_URL}/${category}`);
 
     try {
       const res = await fetch(`${BASE_URL}/${category}`);
