@@ -341,14 +341,22 @@ nav a.active {
   margin-top: 5%;
 }
 
-#closeLightbox,
-#prev,
-#next {
-  position: absolute;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  user-select: none;
+#lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  text-align: center;
+}
+
+#lightboxContent img {
+  max-width: 90%;
+  max-height: 90%;
+  margin-top: 5%;
 }
 
 #closeLightbox {
@@ -365,13 +373,23 @@ nav a.active {
 #closeLightbox:hover {
   color: red; /* hover effect */
 }
-#prev {
+
+#prev,
+#next {
+  position: absolute;
   top: 50%;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1000;
+}
+
+#prev {
   left: 30px;
   transform: translateY(-50%);
 }
 #next {
-  top: 50%;
   right: 30px;
   transform: translateY(-50%);
 }
