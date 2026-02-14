@@ -129,3 +129,54 @@ nextBtn.addEventListener("click", () => {
   currentIndex = (currentIndex + 1) % images.length;
   showImage(currentIndex);
 });
+// ✅ Keyboard navigation
+document.addEventListener("keydown", (e) => {
+  if (lightbox.style.display === "block") {
+    if (e.key === "ArrowLeft") {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    } else if (e.key === "ArrowRight") {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    } else if (e.key === "Escape") {
+      lightbox.style.display = "none";
+    }
+  }
+});
+
+document.getElementById("contactForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = {
+    name: e.target.name.value,
+    phone: e.target.phone.value,
+    email: e.target.email.value,
+    message: e.target.message.value,
+  };
+
+  const messageBox = document.getElementById("formMessage");
+  messageBox.innerHTML = ""; // clear previous
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      messageBox.innerHTML =
+        '<div class="alert alert-danger">❌ Failed to send message. Please try again.</div>';
+      return;
+    }
+
+    const result = await response.json();
+    messageBox.innerHTML =
+      '<div class="alert alert-success">✅ ' + result.message + "</div>";
+    e.target.reset(); // clear form after success
+  } catch (err) {
+    console.error(err);
+    messageBox.innerHTML =
+      '<div class="alert alert-danger">⚠️ Something went wrong. Please try again later.</div>';
+  }
+});
