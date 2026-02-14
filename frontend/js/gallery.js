@@ -1,22 +1,43 @@
 const BASE_URL = "https://interior-website-bwn1.onrender.com/api/gallery";
 
+const lightbox = document.getElementById("lightbox");
+const lightboxContent = document.getElementById("lightboxContent");
+const closeBtn = document.getElementById("closeLightbox");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+let currentIndex = 0;
+let images = [];
+
+// ✅ Load gallery images from backend
 async function loadGallery() {
   const groups = document.querySelectorAll(".gallery-group");
 
   for (const group of groups) {
-    const category = group.dataset.category || group.dataset.cat;
+    const category = group.dataset.category;
     console.log("Fetching gallery:", `${BASE_URL}/${category}`);
 
     try {
       const res = await fetch(`${BASE_URL}/${category}`);
-      const images = await res.json();
+      const data = await res.json();
 
-      group.innerHTML = `<h2>${category}</h2>`;
+      // Add heading
+      group.innerHTML = `<h3>${category}</h3>`;
 
-      images.forEach((imgUrl) => {
+      data.forEach((imgUrl) => {
         const img = document.createElement("img");
         img.src = imgUrl;
         img.className = "gallery-img";
+
+        // ✅ Add to global images array
+        images.push(imgUrl);
+
+        // ✅ Attach click event
+        img.addEventListener("click", () => {
+          currentIndex = images.indexOf(imgUrl);
+          openLightbox();
+        });
+
         group.appendChild(img);
       });
     } catch (err) {
@@ -27,23 +48,7 @@ async function loadGallery() {
 
 window.addEventListener("DOMContentLoaded", loadGallery);
 
-const lightbox = document.getElementById("lightbox");
-const lightboxContent = document.getElementById("lightboxContent");
-const closeBtn = document.getElementById("closeLightbox");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-
-let currentIndex = 0;
-let images = [];
-
-document.querySelectorAll(".gallery-group img").forEach((img, index) => {
-  images.push(img.src);
-  img.addEventListener("click", () => {
-    currentIndex = index;
-    openLightbox();
-  });
-});
-
+// ✅ Lightbox functions
 function openLightbox() {
   lightbox.style.display = "block";
   showImage(currentIndex);
@@ -53,19 +58,23 @@ function showImage(index) {
   lightboxContent.innerHTML = `<img src="${images[index]}" alt="gallery image">`;
 }
 
+// Close
 closeBtn.addEventListener("click", () => {
   lightbox.style.display = "none";
 });
 
+// Prev
 prevBtn.addEventListener("click", () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   showImage(currentIndex);
 });
 
+// Next
 nextBtn.addEventListener("click", () => {
   currentIndex = (currentIndex + 1) % images.length;
   showImage(currentIndex);
 });
+
 // ✅ Keyboard navigation
 document.addEventListener("keydown", (e) => {
   if (lightbox.style.display === "block") {
