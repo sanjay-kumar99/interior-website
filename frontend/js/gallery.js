@@ -1,4 +1,4 @@
-const BASE_URL = "https://interior-backend.onrender.com/api/gallery";
+const BASE_URL = "https://interior-website-bwn1.onrender.com/api/gallery";
 
 async function loadGallery() {
   const groups = document.querySelectorAll(".gallery-group");

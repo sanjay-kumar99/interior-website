@@ -6,7 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const BASE_URL =
-  process.env.BASE_URL || "https://interior-backend.onrender.com";
+  process.env.BASE_URL || "https://interior-website-bwn1.onrender.com";
+  
 
 // ✅ Proper CORS config
 app.use(

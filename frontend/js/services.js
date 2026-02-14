@@ -1,4 +1,4 @@
-const BASE_URL = "https://interior-backend.onrender.com";
+const BASE_URL = "https://interior-website-bwn1.onrender.com";
 
 document.querySelectorAll(".service-card img").forEach((img) => {
   const category = img.dataset.category || img.dataset.cat;

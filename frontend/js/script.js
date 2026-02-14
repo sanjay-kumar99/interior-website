@@ -1,4 +1,4 @@
-const BASE_URL = "https://interior-backend.onrender.com";
+const BASE_URL = "https://interior-website-bwn1.onrender.com";
 
 // 🔹 Load service images dynamically
 async function loadHomeServices() {
