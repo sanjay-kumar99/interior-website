@@ -7,6 +7,11 @@ const nextBtn = document.getElementById("nextBtn");
 
 let currentIndex = 0;
 let allImages = [];
+// ✅ Get category from URL query (?cat=...)
+function getCategoryFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("cat"); // e.g. "falseCeiling"
+}
 
 // Load gallery images dynamically
 async function loadGallery() {
