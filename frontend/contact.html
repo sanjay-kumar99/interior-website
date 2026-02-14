@@ -30,7 +30,6 @@
       <nav>
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
-        <!-- GALLERY DROPDOWN -->
         <div class="dropdown">
           <a href="gallery.html" class="dropbtn">Gallery ▾</a>
           <div class="dropdown-content">
@@ -40,7 +39,7 @@
             <a href="gallery.html#upvc">UPVC Doors</a>
             <a href="gallery.html#glassRailing">Glass Railing</a>
             <a href="gallery.html#acpSheet">ACP Sheet</a>
-            <a href="gallery.html#slidingDoors">PremiumSliding Doors</a>
+            <a href="gallery.html#slidingDoors">Premium Sliding Doors</a>
             <a href="gallery.html#invisibleGrills">Invisible Safety Grills</a>
             <a href="gallery.html#toughenedGlass">Toughened Glass</a>
             <a href="gallery.html#upvcWindows">Aluminium Glass & Windows</a>
@@ -51,6 +50,7 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
+
     <!-- CONTACT SECTION -->
     <section class="container contact-page my-5 py-5">
       <div class="row g-4 align-items-stretch">
@@ -58,29 +58,27 @@
         <div class="col-md-5">
           <div class="contact-info-box">
             <h3>Get In Touch</h3>
-
             <p>
-              <i class="fas fa-location-dot"></i>Prop.: Devinder Kumar
-              Bhangrotu,Ner-Chowk,Tehsil Balh,Distt.Mandi(H.P.)
+              <i class="fas fa-location-dot"></i> Prop.: Devinder Kumar
+              Bhangrotu, Ner-Chowk, Tehsil Balh, Distt. Mandi (H.P.)
             </p>
             <p>
               <i class="fas fa-phone"></i>
-              <a href="tel:+919999999999">+91 85809 22083</a>
+              <a href="tel:+918580922083">+91 85809 22083</a>
             </p>
             <p>
               <i class="fas fa-envelope"></i>
-              <a href="mailto:saiinterior@gmail.com"> saiinterior@gmail.com </a>
+              <a href="mailto:saiinterior@gmail.com">saiinterior@gmail.com</a>
             </p>
 
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/918580922083"
               class="btn btn-success mt-3"
               target="_blank"
             >
               <i class="fab fa-whatsapp"></i> Chat on WhatsApp
             </a>
 
-            <!-- SOCIAL ICONS -->
             <div class="social-icons mt-4">
               <a href="https://www.facebook.com/" class="facebook"
                 ><i class="fab fa-facebook"></i
@@ -100,40 +98,43 @@
           <div class="contact-form-box">
             <h3>Send Message</h3>
 
-            <form
-              action="https://interior-website-bwn1.onrender.com/api/contact"
-              method="POST"
-            >
+            <!-- ✅ Added id for JS handling -->
+            <form id="contactForm">
               <input
                 type="text"
+                name="name"
                 class="form-control mb-3"
                 placeholder="Your Name"
                 required
               />
-
               <input
                 type="tel"
+                name="phone"
                 class="form-control mb-3"
                 placeholder="Phone Number"
                 required
               />
-
               <input
                 type="email"
+                name="email"
                 class="form-control mb-3"
                 placeholder="Email Address"
                 required
               />
-
               <textarea
+                name="message"
                 class="form-control mb-3"
                 rows="4"
                 placeholder="Your Message"
                 required
               ></textarea>
-
-              <button class="btn btn-dark w-100" type="submit">Send Message</button>
+              <button class="btn btn-dark w-100" type="submit">
+                Send Message
+              </button>
             </form>
+
+            <!-- ✅ Success/Error message placeholder -->
+            <div id="formMessage" class="mt-3"></div>
           </div>
         </div>
       </div>
@@ -154,5 +155,10 @@
     <footer class="main-footer">
       <p>© 2026 Sai Aluminium & Glass House</p>
     </footer>
+
+    <!-- ✅ Contact Form Script -->
+    <script>
+      
+    </script>
   </body>
 </html>
