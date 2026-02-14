@@ -355,11 +355,15 @@ nav a.active {
   position: absolute;
   top: 20px;
   right: 30px;
-  color: white;
-  font-size: 2rem;
+  color: #fff; /* white so it shows on dark background */
+  font-size: 2.5rem; /* make it large */
   font-weight: bold;
   cursor: pointer;
-  z-index: 1000; /* make sure it's above the image */
+  z-index: 1000; /* ensure it's above the image */
+}
+
+#closeLightbox:hover {
+  color: red; /* hover effect */
 }
 #prev {
   top: 50%;
