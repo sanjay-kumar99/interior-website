@@ -1,14 +1,13 @@
+const BASE_URL = "https://interior-backend.onrender.com";
+
 async function loadHomeServices() {
   const imgs = document.querySelectorAll(".service-img");
 
   for (const img of imgs) {
-    const category = img.dataset.category;
+    const category = img.dataset.category; // ✅ सही attribute
 
     try {
-      const res = await fetch(
-        `https://interior-backend.onrender.com/api/gallery/${category}`,
-      );
-
+      const res = await fetch(`${BASE_URL}/api/gallery/${category}`);
       const data = await res.json();
 
       if (Array.isArray(data) && data.length > 0) {
