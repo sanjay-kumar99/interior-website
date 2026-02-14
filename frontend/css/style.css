@@ -352,8 +352,14 @@ nav a.active {
 }
 
 #closeLightbox {
+  position: absolute;
   top: 20px;
   right: 30px;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000; /* make sure it's above the image */
 }
 #prev {
   top: 50%;
