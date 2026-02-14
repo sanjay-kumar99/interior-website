@@ -10,15 +10,23 @@ let allImages = [];
 // ✅ Get category from URL query (?cat=...)
 function getCategoryFromURL() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("cat"); // e.g. "falseCeiling"
+  const cat = params.get("cat");
+  return cat ? cat.toLowerCase() : null; // normalize to lowercase
 }
 
-// Load gallery images dynamically
 async function loadGallery() {
+  const selectedCategory = getCategoryFromURL();
   const groups = document.querySelectorAll(".gallery-group");
 
   for (const group of groups) {
     const category = group.dataset.category;
+
+    // ✅ If a category is selected, only load that one
+    if (selectedCategory && category !== selectedCategory) {
+      group.style.display = "none";
+      continue;
+    }
+
     try {
       const res = await fetch(`${BASE_URL}/${category}`);
       const data = await res.json();
@@ -29,10 +37,8 @@ async function loadGallery() {
         img.className = "img-fluid mb-3 gallery-img";
         group.appendChild(img);
 
-        // Add to global array
         allImages.push(img);
 
-        // Click event to open modal
         img.addEventListener("click", () => {
           currentIndex = allImages.indexOf(img);
           showImage();
@@ -44,7 +50,6 @@ async function loadGallery() {
     }
   }
 }
-
 function showImage() {
   modalImage.src = allImages[currentIndex].src;
 }
