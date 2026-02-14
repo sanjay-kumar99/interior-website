@@ -1,14 +1,14 @@
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://interior-backend.onrender.com";
 
-document.querySelectorAll(".service-card img").forEach(img => {
+document.querySelectorAll(".service-card img").forEach((img) => {
   const category = img.dataset.cat;
 
   fetch(`${BASE_URL}/api/gallery/${category}`)
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       if (data.length > 0) {
         img.src = data[0];
       }
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });

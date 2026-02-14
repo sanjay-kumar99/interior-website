@@ -5,7 +5,9 @@ async function loadHomeServices() {
     const category = img.dataset.category;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/gallery/${category}`);
+      const res = await fetch(
+        `https://interior-backend.onrender.com/api/gallery/${category}`,
+      );
 
       const data = await res.json();
 
