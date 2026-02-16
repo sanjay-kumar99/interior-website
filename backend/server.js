@@ -13,7 +13,7 @@ const BASE_URL =
 app.use(
   cors({
     origin: [
-      "https://interior-showcase.netlify.app", // Netlify domain allow
+      "https://interior-showcase-olive.vercel.app/", // vercel domain allow
       "http://localhost:3000", // local dev allow
     ],
     methods: ["GET", "POST"],
